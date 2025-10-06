@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: forum_db
+    environment:
+      POSTGRES_USER: server
+      POSTGRES_PASSWORD: production
+      POSTGRES_DB: forum_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d:ro
+volumes:
+  pgdata:

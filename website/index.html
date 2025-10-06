@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discus(s) Forum</title>
+    <!-- SVG Favicon -->
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+    <!-- PNG Fallback -->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="32x32">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="module" src="assets/js/script.js" defer></script>
+    <!-- <script type="module" src="assets/js/websocket_test.js" defer></script> -->
+</head>
+
+<body>
+    <!-- Sign In page -->
+    <div id="signin-page" class="signin-page">
+        <div class="logo-bg"></div>
+
+        <div class="form-section">
+            <h2 class="form-title">Sign In</h2>
+
+            <form id="signin-form">
+                <div class="form-group">
+                    <label>Username or Email</label>
+                    <input type="text" name="identifier" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-field">
+                        <input type="password" name="password" required>
+                        <button type="button" class="password-toggle">show</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="signin-btn" class="register-btn" tabindex="0">Sign In!</button>
+
+                <div class="signup-link">
+                    Don't have an account? <a href="#" id="signup-link" tabindex="0">Sign up here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Registration Page -->
+    <div id="registration-page" class="registration-page">
+        <div class="logo-bg"></div>
+
+        <div class="form-section">
+            <h2 class="form-title">Create your account</h2>
+
+            <form id="registration-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Age</label>
+                        <div class="select-wrapper">
+                            <select name="age">
+                                <option value="">(select age range)</option>
+                                <option value="13-17">13-17</option>
+                                <option value="18-25">18-25</option>
+                                <option value="26-35">26-35</option>
+                                <option value="36-50">36-50</option>
+                                <option value="50+">50+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Sex</label>
+                        <div class="select-wrapper">
+                            <select name="gender">
+                                <option value="">(select one)</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>First name</label>
+                    <input type="text" name="first_name">
+                </div>
+
+                <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text" name="last_name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-field">
+                        <input type="password" name="password" required>
+                        <button type="button" class="password-toggle">show</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Retype password</label>
+                    <div class="password-field">
+                        <input type="password" name="confirm_password" required>
+                        <button type="button" class="password-toggle">show</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="register-btn" class="register-btn" tabindex="0">Register!</button>
+
+                <div class="signin-link">
+                    Are you a returning user? <a href="#" id="login-link" tabindex="0">Sign in here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app-container" class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="assets/img/logo.svg" alt="Discus Logo" class="header-logo-svg">
+                </div>
+
+                <nav class="header-nav">
+                    <a href="#" class="nav-item" data-page="home" id="see-all-posts" tabindex="0">
+                        <img src="assets/img/home.svg" alt="Home"> See All Posts
+                        <span id="new-post-count" class="notification-badge" style="display:none;">0</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="new-post" tabindex="0">
+                        <img src="assets/img/newpost.svg" alt="New Post"> New Post
+                    </a>
+                </nav>
+            </div>
+
+            <div class="header-right">
+                <button class="sound-btn" id="sound-toggle" tabindex="0">
+                    <!-- Sound On (default) -->
+                    <img id="sound-icon-on" src="assets/img/sound-on.svg" alt="sound on" style="display:none;">
+
+                    <!-- Sound Off (hidden initially) -->
+                    <img id="sound-icon-off" src="assets/img/sound-off.svg" alt="sound off">
+                </button>
+
+
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <span></span>
+                </div>
+                <button class="power-btn" id="logout-link"><img src="assets/img/logout.svg" alt="Logout" tabindex="0"> </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <!--
+                <div class="search-box">
+                    <img src="assets/img/search.svg" alt="Search">
+                    <input type="text" placeholder="Search...">
+                </div>
+                -->
+
+                <div class="categories" id="categories-container"></div>
+            </aside>
+
+            <main class="content-area">
+                <!-- Home Page -->
+                <div id="home-page" class="page"></div>
+                <div id="filtered-posts-page" class="page"></div>
+
+                <!-- Single Post Page -->
+                <div id="single-post-page" class="page">
+                    <div id="single-post-scroll" class="scrollable-thread">
+                        <!-- The single post content will be rendered here by JavaScript -->
+                        <div id="single-post-content-area"></div>
+                        <!-- The comments section will be rendered here by JavaScript -->
+                        <div id="comments-display-area"></div>
+                    </div>
+
+                    <!-- New comment input OUTSIDE the scrollable-thread but still in single-post-page -->
+                    <div class="comment-input">
+                        <input id="comment-input" type="text" placeholder="New Comment:">
+                        <button id="submit-comment" class="send-btn"><img src="assets/img/addcomment.svg" tabindex="0"></button>
+                    </div>
+                </div>
+
+
+                <!-- New Post Page -->
+                <div id="new-post-page" class="page">
+                    <div class="new-post-form">
+                        <h2 class="form-title">Create a new post</h2>
+
+                        <form id="new-post-form">
+                            <div class="input-group">
+                                <input type="text" placeholder="Title:" id="post-title">
+                                <div class="error-message" id="title-error">Title cannot be empty!</div>
+                            </div>
+
+                            <div class="input-group">
+                                <textarea placeholder="Content:" id="post-content"></textarea>
+                                <div class="error-message" id="content-error">Content cannot be empty!</div>
+                            </div>
+
+                            <div class="input-group">
+                                <label style="margin-bottom: 10px; color: #718096;">Category:</label>
+                                <div id="categories-selection-on-new-post" class="category-tags"></div>
+                            </div>
+
+                            <button type="submit" class="submit-btn" tabindex="0">Post it!</button>
+                            <div style="clear: both;"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- DM Page -->
+                <div id="dm-page" class="page">
+                    <div class="dm-container">
+                    </div>
+                </div>
+            </main>
+
+            <aside class="users-sidebar">
+                <div class="users-list"></div>
+            </aside>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+API Endpoints
+
+/user                                                                                       DONE
+------------------------------------------------------------------------------------------------ 
+/categories                                                                                 DONE
+------------------------------------------------------------------------------------------------ 
+/posts?last_id=x&range=10&categories=x // category ids sep by comma "1,2,3"                 DONE
+------------------------------------------------------------------------------------------------ 
+/users_feed?last_id=x&range=10&with_conv=x                                                  DONE
+------------------------------------------------------------------------------------------------ 
+/post?id=x                                                                                  DONE
+------------------------------------------------------------------------------------------------ 
+/comments?parent_id=x&last_id=x&range=10                                                    NOPE
+------------------------------------------------------------------------------------------------
+/dm?id=xlast_id=x&before=10&after=10 // including last_id                                       DONE
+------------------------------------------------------------------------------------------------ 
+/usersreacted?content_id=x&type=x&last_id=x&range=10                                  (OPTIONAL)
+------------------------------------------------------------------------------------------------ 
+/mark-seen, { method: 'POST',  body: "dm_ids": int}                                         DONE
+------------------------------------------------------------------------------------------------ 
+/new_post  {method: 'POST', body: { title: string, body: string, categories: string } }     DONE
+------------------------------------------------------------------------------------------------  
+/new_comment {method: 'POST', body: {parent_id: int64, body: string}}                      MAYBE
+------------------------------------------------------------------------------------------------ 
+/new_dm {                                                                                   DONE
+    method: 'POST', 
+    body: { conversation_id: int64, body: string }
+    }
+------------------------------------------------------------------------------------------------  
+/new_reaction {                                                                             DONE
+     method: "POST",
+     body: { content_id: int64, type: string, new: bool }
+}
+-------------------------------------------------------------------------------------------------
+/typing {                                                                                   DONE
+    method: "POST",
+    body: { recipient_id: int64 }   
+    }
+
+
+WebSocket models
+
+Message types expected:
+
+- "new_post"  - always open
+- "new_dm_count" - always open, by client
+- "status_update" - subscription su:id //for comments, posts and dms: reactions and in the case of posts commentcount
+- "user_update" - subscription os:id
+- "new_comment" - subscription nc:id
+- "new_dm" - subscription dm:id
+- "typing" - subscription dm:id
+
+
+Notifications:
+
+- New Post (Id, Title, Body Preview, ReactionCount, Categories, Creator, CommentCount, CurrentUserReactions, CreatedAt, Truncated)
+- New Unread Dm Count (Id, ConversationId, Creator)
+- (Reactions on owned content)
+- (Comments on owned posts)
+
+
+Subscriptions 
+
+HOME: 
+(older subs may close if limit exceeded)
+- POSTFEED: Reaction/comment count on loaded posts su:id (of post)
+(older subs may close if limit exceeded)
+- USERS_FEED: Loaded user online status os:id (of user)
+
+DM:
+(closes on section change)
+ - CONVERSATION : New dms and typing status in open conversation dm:id(other user when sending from website) dm:smaller_id:larger_id(in server)
+(closes on section change or if limit exceeded)
+ - DM: Reaction on loaded dms su:id(of entity)
+
+
+POST:
+(closes on section change)
+- SINGLE POST: New comments on open post nc:id (of post)
+(closes on section change or if limit exceeded)
+- COMMENTS: Reaction on loaded comments su:id (of comment)
+
+
+
+TODOS
+- Handle dropped connection?
+- Set up websocket for new user (triggered on register). Check how to handle user sorting. Can the back send previous id?
+(optional):
+- Notifications
+- Show who reacted on hover on reaction (UsersReactedRequest)
+
+Qs:
+
+
+NOTES:
+

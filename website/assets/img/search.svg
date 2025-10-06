@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.06 21.66">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #505a80;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.79px;
+      }
+    </style>
+  </defs>
+  <g id="search">
+    <g>
+      <circle class="cls-1" cx="7.64" cy="7.64" r="6.74"/>
+      <line class="cls-1" x1="17.16" y1="20.77" x2="11.73" y2="12.99"/>
+    </g>
+  </g>
+</svg>

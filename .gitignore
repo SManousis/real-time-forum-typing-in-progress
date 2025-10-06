@@ -1,0 +1,16 @@
+# macOs
+.DS_Store
+
+# linter
+.trunk
+
+# debug files
+.vscode
+*.bin
+*.exe
+__debug_bin*
+# mkcert certificates
+*.pem
+qodana.yaml
+.idea
+

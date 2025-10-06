@@ -1,0 +1,2 @@
+The shared package will probably mostly hold structs that aught to be identical between the servers, 
+and all servers will import this package for ease of use.
